@@ -14,7 +14,9 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  //ScrollView
+  Image
 } from 'react-native';
 
 class FirstPNApp extends Component {
@@ -32,7 +34,10 @@ class FirstPNApp extends Component {
       height: 0,
       weight: 0,
       BMI: 0,
-      result: ''
+      result: '',
+      BMI_list: [],
+      result_list: [],
+      input_num: ''
       //若此處將text指定為固定值  則畫面上只能限是此質無法進行改變
       //因此如果你要讓你的textinput可以更改上面的職的話須加入onchangetext    
     }
@@ -41,6 +46,7 @@ class FirstPNApp extends Component {
     console.log('Hello Corn~')
   }
   
+  // when you press this button it will calculate the bmi for you
   onPress2 = () => {
     var h = this.state.height / 100
     var w = this.state.weight
@@ -96,6 +102,18 @@ class FirstPNApp extends Component {
           {/*TouchableOpacity is the button in react native*/}
         </TouchableOpacity>
         
+        {/*
+        <ScrollView contentContainerStyle={styles.contentContainer}></ScrollView>
+        */}
+        
+        <TextInput 
+          style={{backgroundColor: 'gray', color: 'white', textAlign: 'center', width: 120, height:40}}
+          onChangeText = {(input_num) => this.setState({input_num})} value={`${this.state.input_num}`}></TextInput>
+        <Text></Text>
+        <Image
+          style={{width: 90, height: 70}}
+          source={{uri: `https://pokeadvisor.com/img/mon/${this.state.input_num}.png`}}
+        />
         <Text style={styles.welcome} onPress={this.onPress} >
           Welcome to React Native!
         </Text>
@@ -106,6 +124,7 @@ class FirstPNApp extends Component {
           Double tap R on your keyboard to reload,{'\n'}
           Shake or press menu button for dev menu
         </Text>
+        
       </View>
     );
   }
